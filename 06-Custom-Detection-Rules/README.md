@@ -38,7 +38,7 @@ The following is a conceptual pattern only. Replace the base SID with the exact 
 <group name="windows,bruteforce,">
   <rule id="100100" level="10" frequency="5" timeframe="60">
     <if_matched_sid>REPLACE_WITH_VERIFIED_BASE_SID</if_matched_sid>
-    <same_source_ip />
+    <same_srcip />
     <description>Repeated Windows logon failures from the same source within 60 seconds</description>
   </rule>
 </group>
