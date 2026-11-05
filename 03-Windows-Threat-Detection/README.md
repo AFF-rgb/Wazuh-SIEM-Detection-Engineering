@@ -116,7 +116,7 @@ Do not assume Linux SSH rule IDs will correctly parse Windows OpenSSH logs witho
 
 The lab notes describe blocking a test source after three failed attempts in 120 seconds and restoring access after 300 seconds.
 
-**The original configuration should not be copied as-is.** It defines `netsh.exe` as a Wazuh command. Wazuh custom Active Response executables must be designed for the Active Response input protocol; invoking the Windows utility directly is not automatically a valid response script. The response must be installed and tested on the Windows endpoint, and the Wazuh manager must target the endpoint that generated the alert.
+**Correction to the initial review:** Wazuh provides a built-in Windows `netsh.exe` Active Response executable for blocking an IP address. The notes' use of a `netsh` command and `local` execution is consistent with the documented Windows response pattern, provided the executable is present in the agent's Active Response directory and the alert contains a usable source IP. A custom script is only needed if the built-in action does not meet the lab requirements. See the [Wazuh Windows Active Response example](https://documentation.wazuh.com/current/proof-of-concept-guide/block-malicious-actor-ip-reputation.html).
 
 Before enabling automatic blocking:
 - Use a disposable test endpoint and source.
