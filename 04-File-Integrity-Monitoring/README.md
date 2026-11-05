@@ -19,9 +19,10 @@ The notes place the following configuration in the Linux agent group's `agent.co
 ```xml
 <agent_config os="Linux">
   <syscheck>
-    <directories check_all="yes" report_changes="yes" realtime="yes">/home/*/.ssh/authorized_keys</directories>
-    <directories check_all="yes" realtime="yes">/etc/passwd</directories>
-    <directories check_all="yes" realtime="yes">/etc/shadow</directories>
+    <!-- Real-time monitoring applies to directories; individual files are scanned on the configured schedule. -->
+    <directories check_all="yes" report_changes="yes">/home/*/.ssh/authorized_keys</directories>
+    <directories check_all="yes">/etc/passwd</directories>
+    <directories check_all="yes">/etc/shadow</directories>
     <directories realtime="yes">/var/spool/cron</directories>
     <directories check_all="yes">/var/log/auth.log</directories>
   </syscheck>
