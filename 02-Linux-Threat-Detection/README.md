@@ -34,8 +34,6 @@ Ensure the target distribution actually writes authentication events to the conf
 
 Detailed project documentation: [SSH Brute-Force Detection and Successful-Login Correlation](SSH-Brute-Force/README.md).
 
-Detailed project documentation: [SSH Brute-Force Detection and Successful-Login Correlation](SSH-Brute-Force/README.md).
-
 **Objective:** identify repeated failed SSH authentication attempts and investigate a subsequent successful login.
 
 **Lab simulation:** use a dedicated test account and a controlled password list from the isolated attacker VM. Do not run password-guessing tools against systems outside the lab.
