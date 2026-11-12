@@ -123,7 +123,7 @@ The notes record a custom decoder and rule:
 <group name="linux, persistence,">
   <rule id="100003" level="10">
     <if_sid>2830</if_sid>
-    <decoded_as>crontab-custom</decoded_as>
+    <decoded_as>crontab-fields</decoded_as>
     <description>Suspicious persistence: cron job $(action) by user $(user)</description>
     <mitre>
       <id>T1053.003</id>
@@ -133,6 +133,8 @@ The notes record a custom decoder and rule:
 ```
 
 The source notes include sample syslog entries for crontab `BEGIN EDIT`, `REPLACE`, `END EDIT`, and `LIST` activity, plus the command used to launch `wazuh-logtest`. They describe an expected rule 100003 result, but do not include the actual Phase 1–3 output. Therefore, this is **documented with sample source events; end-to-end rule validation remains pending**.
+
+**Decoder-chain correction:** the rule should identify the most specific decoder that extracts the `user` and `action` fields. In this parent/child decoder design, that is `crontab-fields`, not the parent `crontab-custom`. Confirm the final decoder name and extracted fields in Phase 2 of `wazuh-logtest` before relying on the rule.
 
 The FIM configuration also monitors `/var/spool/cron`. This can provide a second telemetry path for cron persistence, but the custom decoder/rule and FIM alert are distinct detections and should be validated independently.
 
