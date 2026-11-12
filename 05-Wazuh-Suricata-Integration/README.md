@@ -271,6 +271,32 @@ The 19 Suricata screenshots have been uploaded to this chapter. They cover senso
 | Raw EVE JSON and matching Wazuh alert exports | Not yet included |
 | Screenshot evidence | 19 PNG files uploaded; passwords, SSH private keys, and hashes redacted where present |
 
+## 9. Screenshot evidence index
+
+The following screenshots are stored in this chapter directory. Captions describe the visible subject at a high level; they do not replace validation of the underlying configuration or event data.
+
+| Screenshot | Evidence |
+|---|---|
+| [01.png](./01.png) | Network interface information |
+| [02.png](./02.png) | Suricata rules directory |
+| [03.png](./03.png) | Suricata YAML configuration |
+| [04.png](./04.png) | AF_PACKET capture configuration |
+| [05.png](./05.png) | AF_PACKET configuration continuation |
+| [06.png](./06.png) | Community ID configuration |
+| [07.png](./07.png) | Installed Suricata rules |
+| [08.png](./08.png) | Local detection rules |
+| [09.png](./09.png) | Rule-file configuration |
+| [10.png](./10.png) | Suricata configuration validation |
+| [11.png](./11.png) | Suricata configuration / terminal evidence |
+| [12.png](./12.png) | Test request output |
+| [13.png](./13.png) | Wazuh dashboard overview |
+| [14.png](./14.png) | Wazuh event details |
+| [15.png](./15.png) | Connectivity test output |
+| [16.png](./16.png) | Wazuh dashboard event view |
+| [17.png](./17.png) | Wazuh event detail view |
+| [18.png](./18.png) | Nmap SYN scan output |
+| [19.png](./19.png) | Wazuh dashboard event view |
+
 ## References
 
 - [Wazuh — Integrating Suricata](https://documentation.wazuh.com/current/proof-of-concept-guide/integrate-network-ids-suricata.html)
