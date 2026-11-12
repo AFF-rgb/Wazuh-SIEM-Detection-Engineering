@@ -8,7 +8,8 @@ This chapter documents the Active Directory security baseline and the planned Wa
 |---|---|
 | Domain | `stech.net` |
 | Domain controller | `DC01-LAB` — Windows Server 2022 Standard Evaluation, build 20348 |
-| Domain / forest functional level | Windows Server 2016 |
+| Domain functional level | `Windows2016Domain` |
+| Forest functional level | `Windows2016Forest` |
 | Client | Windows 10 Pro |
 | Standard IT identity | `a.fadous` |
 | Privileged identity | `IT.sysadmin` |
@@ -103,4 +104,4 @@ PowerShell Operational logging is a separate channel and should be enabled and c
 - Use a dedicated administrative identity for domain administration and avoid routine browsing or email with that identity.
 - Review the effective Fine-Grained Password Policy for each privileged account.
 - Treat LAPS read permissions as sensitive; test access with both an authorized administrator and an ordinary IT user.
-- Preserve hostnames, usernames, timestamps, and technical details in portfolio evidence. Redact only passwords, SSH private keys, and hashes as instructed.
+- Preserve hostnames, usernames, timestamps, IP addresses, and technical details in portfolio evidence. Protect passwords and SSH private keys with `<REDACTED>`. Hash values that are part of controlled demonstrations may remain visible, as agreed for this portfolio.
