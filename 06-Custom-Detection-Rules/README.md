@@ -88,7 +88,7 @@ The notes record this rule design:
 </group>
 ```
 
-**Review notes:** Confirm that base rule 5902 corresponds to the intended account-creation event in the installed ruleset. The alert should identify the affected account and endpoint before being treated as useful detection coverage.
+**Review notes:** The source notes do not include the decoded event or a captured alert proving that SID 5902 is the account-creation parent. I could not confirm SID 5902 as the intended account-creation rule in the relevant upstream Wazuh v4.7.5 rules files reviewed. Treat this parent SID as **unverified**; use the actual Windows/Linux event source and decoded event to identify the correct parent before enabling the rule. The alert should identify the affected account and endpoint. Also review the group label: `.SSH` does not describe this account-creation use case and should be replaced with an appropriate local group name when the rule is finalized.
 
 ### 100013 — Authentication log tampering
 
@@ -221,7 +221,7 @@ The source notes describe a three-attempt/two-minute threshold and a five-minute
 </group>
 ```
 
-The source notes associate base SID 18107 with Windows Firewall-related scan telemetry. Verify the base rule against the actual alert and confirm the Windows Firewall log is being collected by the agent. A single firewall event or port connection is not sufficient to establish an Nmap scan; use event volume, destination-port diversity, time window, and source identity to support the conclusion. The rule as recorded is an indicator wrapper, not a complete scan-correlation rule.
+The source notes associate base SID 18107 with Windows Firewall-related scan telemetry, but I could not confirm that SID in the relevant upstream Wazuh v4.7.5 firewall and Windows Firewall rule files reviewed. Treat 18107 as **unverified for this release** until the exact event and parent rule are shown by the lab manager. Confirm Windows Firewall log collection and inspect the decoded event fields. A single firewall event or port connection is not sufficient to establish an Nmap scan; use event volume, destination-port diversity, time window, and source identity to support the conclusion. The rule as recorded is an indicator wrapper, not a complete scan-correlation rule.
 
 ## Telemetry and centralized agent configuration recorded in the notes
 
