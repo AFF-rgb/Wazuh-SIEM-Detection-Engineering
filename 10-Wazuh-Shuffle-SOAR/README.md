@@ -89,7 +89,7 @@ Before publication, replace only passwords, SSH private keys, and hashes with th
 ## Current documentation status
 
 - **Documented:** Docker-based Shuffle deployment steps and TheHive/Cassandra installation prerequisites.
-- **Evidence available:** screenshots of the Shuffle-related environment and configuration from the supplied archive.
+- **Evidence available:** text instructions for Shuffle deployment and TheHive/Cassandra prerequisites. The screenshot folder labelled for Shuffle duplicates the Suricata screenshots; it does not provide independent SOAR evidence.
 - **Needs validation:** current container health, working Wazuh alert ingestion, Shuffle workflow execution, TheHive case creation, and any automated response.
 
 ## References
