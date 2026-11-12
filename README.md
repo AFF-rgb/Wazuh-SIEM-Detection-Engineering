@@ -86,4 +86,4 @@ The source notes refer to Wazuh 4.7 and a Windows agent package 4.7.5. These are
 - [06 — Custom Detection Rules](06-Custom-Detection-Rules/README.md)
 - [07 — Active Directory Threat Detection](07-Active-Directory-Threat-Detection/README.md)
 - [08 — Incident Investigation](08-Incident-Investigation/README.md)
-- [09 — Evidence and Documentation](09-Evidence-and-Documentation/README.md)
+- [09 — Evidence and Documentation](09-Evidence-and-Documentation/README.md)\n- [10 — Wazuh and Shuffle SOAR](10-Wazuh-Shuffle-SOAR/README.md)
