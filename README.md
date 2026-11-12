@@ -24,7 +24,7 @@ The notes describe a VMware-based lab with an Ubuntu Wazuh server, Windows endpo
 | Linux detection | SSH authentication, privilege escalation, account/key persistence, log tampering, cron changes | Scenarios documented; custom rules require per-version validation |
 | Windows detection | Security events, RDP logons, firewall logs, Sysmon | Configuration documented; telemetry and rule IDs must be verified on the target |
 | Active response | Temporary blocking of a simulated RDP source | Lab configuration recorded; implementation requires correction and end-to-end revalidation |
-| FIM | Linux account/authentication/cron paths and Windows `C:\\Users\\Public` monitoring with who-data and change reporting | Configuration and staged Windows experiment documented; validate per-path/event evidence |
+| FIM | Linux account/authentication/cron paths and Windows `C:\Users\Public` monitoring with who-data and change reporting | Configuration and staged Windows experiment documented; validate per-path/event evidence |
 | Suricata | Wazuh integration, ET Open, nine local signatures, EVE JSON collection, and traffic tests | Configuration and screenshots documented; raw EVE-to-Wazuh alert pairs still needed |
 | Active Directory | Domain and Windows event monitoring | Lab work in progress; detection coverage to be documented separately |
 
@@ -86,4 +86,5 @@ The source notes refer to Wazuh 4.7 and a Windows agent package 4.7.5. These are
 - [06 — Custom Detection Rules](06-Custom-Detection-Rules/README.md)
 - [07 — Active Directory Threat Detection](07-Active-Directory-Threat-Detection/README.md)
 - [08 — Incident Investigation](08-Incident-Investigation/README.md)
-- [09 — Evidence and Documentation](09-Evidence-and-Documentation/README.md)\n- [10 — Wazuh and Shuffle SOAR](10-Wazuh-Shuffle-SOAR/README.md)
+- [09 — Evidence and Documentation](09-Evidence-and-Documentation/README.md)
+- [10 — Wazuh and Shuffle SOAR](10-Wazuh-Shuffle-SOAR/README.md)
