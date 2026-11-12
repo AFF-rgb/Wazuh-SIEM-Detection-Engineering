@@ -308,7 +308,7 @@ Mappings are scenario-level references from the lab notes. Keep them on individu
 
 ## Secret handling
 
-The source archive contains sensitive credential/key material. It is intentionally not reproduced here. Before publishing any further raw logs, screenshots, or configuration exports, replace **passwords, SSH keys, and hashes** with the literal `<REDACTED>`. Preserve the technical context needed to understand the lab, and rotate any credential that was exposed outside the lab.
+The source archive contains sensitive credential/key material. It is intentionally not reproduced here. Before publishing raw logs, screenshots, or configuration exports, protect **passwords and SSH private keys** by replacing them with the literal `<REDACTED>`. Hash values that are part of a controlled demonstration may remain visible, as agreed for this portfolio. Preserve the technical context needed to understand the lab, and rotate any credential that was exposed outside the lab.
 
 ## Current publication status
 
