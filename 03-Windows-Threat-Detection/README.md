@@ -54,7 +54,7 @@ The notes propose:
 - Custom rule 100021 for a successful RDP logon.
 - Correlation rule 100900 for repeated failures.
 
-These are draft identifiers. Validate the event field names and values against the actual decoded event from your installed agent/manager version before using the rules.
+The separate SIEM-WAZUH notes provide a more concrete correlation example: custom rule **100100**, using base SID **60112**, with `frequency="5"` and `timeframe="60"`. This is a generic failed-Windows-logon threshold in the notes; it does not itself prove that all five events are RDP Logon Type 10. The example also does not group by source IP, so events from different sources may be counted together. Validate the event fields and correlation scope, and add a supported source grouping key if the detection objective requires per-source counting. The identifiers 100020, 100021, and 100900 remain draft entries until their XML and event behavior are confirmed.
 
 ## 3. RDP brute-force correlation
 
@@ -65,7 +65,7 @@ The notes describe a threshold of three failed RDP attempts within 120 seconds. 
 - Correlation is scoped to the same source IP when that is the intended behavior.
 - The alert includes enough fields for an analyst to identify the target account and source.
 
-The notes cite rule ID 60122 as the base rule. Verify this using a real alert in the dashboard or `/var/ossec/logs/alerts/alerts.json`; do not hardcode it based solely on an old note.
+The primary SIEM-WAZUH notes explicitly state that **rule ID 60112** was confirmed by inspecting alerts for a single failed Windows logon in this lab. A separate later note mentions 60122, so the source material is inconsistent. Treat **60112 as the better-supported historical value**, but re-check `rule.id` in the actual alert JSON before reusing it with another Wazuh release or event pipeline.
 
 ## 4. Sysmon telemetry
 
