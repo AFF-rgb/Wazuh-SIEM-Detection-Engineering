@@ -37,4 +37,4 @@ For each investigation, capture:
 - Containment/remediation recommendation.
 - Validation result and remaining uncertainty.
 
-Do not publish unredacted usernames, public IPs, host identifiers, credentials, or sensitive log content.
+Before publication, replace only passwords, SSH private keys, and hashes with `<REDACTED>`. Preserve IP addresses, MAC addresses, hostnames, usernames, timestamps, and other technical details. Do not publish password values, private-key material, or hashes.
