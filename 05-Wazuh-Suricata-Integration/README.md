@@ -245,12 +245,17 @@ The notes describe the ping and SYN scan as successfully detected in Wazuh. The 
 
 ## 7. Detection engineering considerations
 
-- The ICMP rule detects echo-related traffic broadly; it does not by itself establish malicious host discovery.
-- The HTTP traffic and `curl` user-agent rules are broad indicators, not malware verdicts.
-- The HTTP flood and SYN scan rules use source-based thresholds. Validate the thresholds against the actual traffic volume and expected network baseline.
-- The SQL injection and XSS rules use simple content matches. Encoding, alternate payloads, HTTPS encryption, and application context can affect visibility.
-- The executable-download rule matches `.exe` in the HTTP URI; it does not inspect the downloaded file or prove that it is malicious.
-- The POST rule identifies HTTP POST requests; POST traffic is not inherently suspicious.
+- **SID 1000001 — ICMP:** matches ICMP traffic generally, not only echo requests. It can generate routine network-noise alerts and does not by itself establish host discovery or malicious intent.
+- **SID 1000002 — HTTP:** matches decoded HTTP transactions visible to the sensor. It is a broad protocol-visibility rule, not a threat verdict.
+- **SID 1000003 — curl user-agent:** looks for the string `curl` in the HTTP User-Agent buffer. It can identify scripted clients but is easy to evade and can match legitimate administration.
+- **SID 1000004 — HTTP threshold:** raises an alert when the configured source-based threshold is reached for TCP traffic to destination port 80. It is a heuristic, not proof of a denial-of-service attack.
+- **SID 1000005 — SYN threshold:** counts TCP SYN-flagged packets per source over the configured interval. Normal connection bursts and scans can both match; tune against a baseline.
+- **SID 1000006 — SQL injection string:** matches the literal `' OR 1=1` string without case sensitivity. It is a basic demonstration signature, not comprehensive SQL-injection detection.
+- **SID 1000007 — XSS string:** matches the literal `<script>` string without case sensitivity. Encoded, obfuscated, or context-dependent payloads may not match.
+- **SID 1000008 — executable URI:** matches `.exe` in the HTTP URI buffer. It does not inspect the response body, file contents, or determine whether a file is malicious.
+- **SID 1000009 — HTTP POST:** matches HTTP POST methods in established client-to-server flows. POST is normal application behavior and should not be treated as malicious by itself.
+- Content-based HTTP signatures depend on the sensor seeing inspectable HTTP. HTTPS payloads are encrypted unless traffic is decrypted before inspection.
+- Confirm that the sensor is positioned on a network path where it can observe the traffic being tested, and correlate Suricata alerts with Wazuh timestamps, agent, source/destination, and rule metadata.
 - Confirm that the Suricata sensor is positioned on a network path where it can observe the traffic being tested.
 - Correlate Suricata alerts with Wazuh agent, source/destination, timestamp, and rule metadata during investigation.
 
@@ -273,28 +278,28 @@ The 19 Suricata screenshots have been uploaded to this chapter. They cover senso
 
 ## 9. Screenshot evidence index
 
-The following screenshots are stored in this chapter directory. Captions describe the visible subject at a high level; they do not replace validation of the underlying configuration or event data.
+The following screenshots are stored in this chapter directory. Captions describe the visible subject at a high level; they do not replace validation of the underlying configuration or event data. Images are linked rather than embedded to keep the README readable.
 
 | Screenshot | Evidence |
 |---|---|
-| [01.png](./01.png) | Network interface information |
-| [02.png](./02.png) | Suricata rules directory |
-| [03.png](./03.png) | Suricata YAML configuration |
+| [01.png](./01.png) | Linux network-interface inventory used to identify the capture interface |
+| [02.png](./02.png) | Suricata rules directory and rule-file layout |
+| [03.png](./03.png) | Main Suricata YAML configuration |
 | [04.png](./04.png) | AF_PACKET capture configuration |
-| [05.png](./05.png) | AF_PACKET configuration continuation |
-| [06.png](./06.png) | Community ID configuration |
-| [07.png](./07.png) | Installed Suricata rules |
-| [08.png](./08.png) | Local detection rules |
-| [09.png](./09.png) | Rule-file configuration |
-| [10.png](./10.png) | Suricata configuration validation |
-| [11.png](./11.png) | Suricata configuration / terminal evidence |
-| [12.png](./12.png) | Test request output |
+| [05.png](./05.png) | AF_PACKET capture configuration continuation |
+| [06.png](./06.png) | Community ID setting enabled in the configuration |
+| [07.png](./07.png) | Installed rules under the Suricata rules directory |
+| [08.png](./08.png) | Custom local Suricata signatures |
+| [09.png](./09.png) | YAML rule-files section referencing the local rules file |
+| [10.png](./10.png) | Suricata configuration-test command/output |
+| [11.png](./11.png) | Additional Suricata configuration or terminal evidence |
+| [12.png](./12.png) | Output from the test HTTP request |
 | [13.png](./13.png) | Wazuh dashboard overview |
-| [14.png](./14.png) | Wazuh event details |
-| [15.png](./15.png) | Connectivity test output |
-| [16.png](./16.png) | Wazuh dashboard event view |
+| [14.png](./14.png) | Wazuh event search/detail view |
+| [15.png](./15.png) | HTTP connectivity and ICMP reachability test output |
+| [16.png](./16.png) | Wazuh dashboard event listing |
 | [17.png](./17.png) | Wazuh event detail view |
-| [18.png](./18.png) | Nmap SYN scan output |
+| [18.png](./18.png) | Nmap TCP SYN scan command/output |
 | [19.png](./19.png) | Wazuh dashboard event view |
 
 ## References
