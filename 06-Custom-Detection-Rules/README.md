@@ -70,7 +70,9 @@ The notes record this rule design:
 </group>
 ```
 
-**Review notes:** The pattern is intended to identify `sudo su -` or `sudo -i`. The notes do not prove that the `match` expression treats the pipe as an OR operator; validate the expression using representative decoded events. A rule matching command text should not be described as proof that a privilege escalation succeeded.
+**Version-specific parent-rule check (Wazuh v4.7.5):** upstream rule 5402 is a child of 5400 and describes a successful sudo operation to ROOT. It matches sudo log content containing `USER=root` and a `COMMAND=` or `TSID=... COMMAND=` field. See the [Wazuh v4.7.5 syslog rules](https://github.com/wazuh/wazuh/blob/v4.7.5/ruleset/rules/0020-syslog_rules.xml).
+
+**Review notes:** The custom pattern is intended to narrow this event to `sudo su -` or `sudo -i`. Confirm what the endpoint actually records in the `COMMAND` field; it may be a resolved executable/argument string rather than the literal command typed. Validate the pipe alternation and matching behavior with representative raw logs and `wazuh-logtest`. Rule 5402 already identifies a successful sudo-to-root event, so the custom rule should be described as a narrower command-pattern alert, not as independent proof of malicious activity.
 
 ### 100012 — Local account creation
 
