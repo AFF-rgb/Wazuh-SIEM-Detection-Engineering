@@ -1,93 +1,135 @@
-# Wazuh SIEM & Detection Engineering
+# Wazuh SIEM & Detection Engineering Lab
 
-Hands-on SIEM engineering portfolio using Wazuh for Linux and Windows security monitoring, detection engineering, endpoint telemetry, file integrity monitoring, automated response, network detection, and Active Directory security monitoring.
+**A hands-on cybersecurity portfolio focused on SIEM operations, detection engineering, endpoint visibility, network monitoring, and incident investigation.**
 
-This repository documents a home lab through its architecture, configuration, attack simulations, detection logic, validation steps, and investigation notes. It distinguishes implemented work from detections that still require validation.
+This repository documents the design, configuration, controlled testing, and technical review of a VMware-based Wazuh lab. It brings together Linux and Windows telemetry, custom detection logic, File Integrity Monitoring (FIM), Suricata network monitoring, Active Directory security foundations, and a documented SOAR integration path.
 
-## Portfolio objectives
+> **Project transparency:** This is an engineering lab and an evolving portfolio. Each chapter distinguishes documented configuration, captured evidence, validated behavior, and work that remains pending. A configuration example is not presented as proof of a working detection.
 
-- Deploy and administer a Wazuh Manager, Indexer, Dashboard, and endpoint agents.
-- Collect and analyze Linux authentication, Windows Security, and Sysmon telemetry.
-- Build and validate custom detection and correlation rules.
-- Simulate controlled attack techniques and investigate resulting alerts.
-- Monitor sensitive files and persistence locations with File Integrity Monitoring (FIM).
-- Test endpoint response actions with safeguards and rollback.
-- Extend monitoring to network telemetry and Active Directory activity.
+## At a glance
 
-## Lab scope
+| | |
+|---|---|
+| **Project type** | SIEM engineering and detection lab |
+| **Core platform** | Wazuh Manager, Indexer, Dashboard, endpoint agents |
+| **Environment** | VMware-based lab |
+| **Operating systems** | Ubuntu Linux, Windows, Kali Linux for authorized simulations |
+| **Network monitoring** | Suricata, EVE JSON, ET Open |
+| **Detection engineering** | Wazuh rules, decoders, MITRE ATT&CK mapping |
+| **Investigation** | Alert triage, event correlation, evidence handling |
+| **Automation track** | Shuffle SOAR integration design; workflow validation pending |
 
-The notes describe a VMware-based lab with an Ubuntu Wazuh server, Windows endpoints, and Kali Linux used for authorized simulations. Lab hostnames, addresses, usernames, and other technical details are retained where relevant to the documented scenarios. Only passwords, SSH private keys, and hashes are redacted in published evidence.
+## Lab architecture
 
-| Area | Coverage | Documentation status |
-|---|---|---|
-| Wazuh deployment | Ubuntu server, core services, dashboard, agent enrollment | Documented; version and OS compatibility caveats recorded |
-| Linux detection | SSH authentication, privilege escalation, account/key persistence, log tampering, cron changes | Scenarios documented; custom rules require per-version validation |
-| Windows detection | Security events, RDP logons, firewall logs, Sysmon | Configuration documented; telemetry and rule IDs must be verified on the target |
-| Active response | Temporary blocking of a simulated RDP source | Configuration and test procedure documented; verify source-IP matching, block/unblock behavior, and end-to-end results before claiming full validation |
-| FIM | Linux account/authentication/cron paths and Windows `C:\Users\Public` monitoring with who-data and change reporting | Configuration and staged Windows experiment documented; validate per-path/event evidence |
-| Suricata | Wazuh integration, ET Open, nine local signatures, EVE JSON collection, and traffic tests | Configuration and screenshots documented; raw EVE-to-Wazuh alert pairs still needed |
-| Active Directory | Domain and Windows event monitoring | Lab work in progress; detection coverage to be documented separately |
+The diagram shows the documented lab components and the intended integration path. Dashed connections represent work that is planned or still requires end-to-end validation.
 
-## Repository structure
+```mermaid
+flowchart LR
+    subgraph LAB["VMware Security Lab"]
+        LINUX["Linux Endpoint"]
+        WINDOWS["Windows Endpoint"]
+        AD["Active Directory Lab"]
+        KALI["Kali Linux<br/>Authorized simulations"]
+        SURICATA["Suricata Sensor"]
+    end
 
-```text
-Wazuh-SIEM-Detection-Engineering/
-├── README.md
-├── 01-Wazuh-Deployment/
-├── 02-Linux-Threat-Detection/
-│   └── SSH-Brute-Force/
-├── 03-Windows-Threat-Detection/
-├── 04-File-Integrity-Monitoring/
-├── 05-Wazuh-Suricata-Integration/
-│   ├── 01.png ... 19.png
-├── 06-Custom-Detection-Rules/
-├── 07-Active-Directory-Threat-Detection/
-├── 08-Incident-Investigation/
-├── 09-Evidence-and-Documentation/
-└── 10-Wazuh-Shuffle-SOAR/
+    subgraph SIEM["Wazuh SIEM"]
+        AGENTS["Wazuh Agents"]
+        MANAGER["Wazuh Manager<br/>Rules & Decoders"]
+        INDEXER["Wazuh Indexer"]
+        DASH["Wazuh Dashboard"]
+    end
+
+    LINUX --> AGENTS
+    WINDOWS --> AGENTS
+    AD -. "Event collection / detection validation" .-> AGENTS
+    KALI -. "Controlled test traffic" .-> LINUX
+    KALI -. "Controlled test traffic" .-> WINDOWS
+    SURICATA --> MANAGER
+    AGENTS --> MANAGER
+    MANAGER --> INDEXER
+    INDEXER --> DASH
+    MANAGER -. "Integration design; workflow not yet validated" .-> SHUFFLE["Shuffle SOAR"]
 ```
 
-Each project area should contain its own README, configuration examples, validation procedure, and sanitized evidence where available.
+## Technical coverage
 
-## Documentation and validation standard
+| Area | Work documented | Evidence / validation position |
+|---|---|---|
+| **Wazuh deployment** | Manager services, dashboard, agent enrollment, deployment notes | Deployment documented; historical version and compatibility caveats retained |
+| **Linux threat detection** | SSH authentication, privilege escalation, account and key persistence, cron activity, log tampering | Scenarios and custom rules documented; end-to-end validation is identified per detection |
+| **Windows threat detection** | Security events, RDP logons, firewall telemetry, event collection | Configuration and test notes documented; rule IDs and telemetry must be verified against the installed ruleset |
+| **Active Response** | RDP brute-force response design, temporary source blocking and rollback | Test procedure documented; source-IP matching and complete block/unblock behavior require evidence |
+| **File Integrity Monitoring** | Linux sensitive paths; Windows Public-folder monitoring, who-data, change reporting | 13 Windows FIM screenshots retained in Chapter 04; staged experiment documented |
+| **Suricata integration** | EVE JSON collection, ET Open, nine local signatures, traffic tests | 19 screenshots retained in Chapter 05; raw EVE-to-Wazuh alert pairs remain a useful evidence improvement |
+| **Custom detection rules** | Linux and Windows rules, parent-rule dependencies, correlation design, MITRE mapping | Rule logic reviewed; version-specific and event-level validation requirements are documented |
+| **Active Directory** | Domain security baseline, privileged group policy, Windows LAPS foundations, event-monitoring plan | AD foundation documented; dedicated Wazuh AD detection evidence remains pending |
+| **Incident investigation** | Alert triage, event review, timeline, impact, response recommendations, case notes | Analyst workflow and evidence standards documented |
+| **Shuffle SOAR** | Docker deployment notes, TheHive/Cassandra prerequisites, Wazuh integration template | Integration and workflow execution are not yet evidenced as operational |
 
-Every detection is documented using the following sequence:
+## Skills and technologies
 
-1. **Objective** — what behavior is being monitored and why.
-2. **Lab topology** — manager, agent, test source, and relevant network boundaries.
-3. **Telemetry** — exact log channel or file and the collection configuration.
-4. **Detection logic** — built-in rule dependency, custom rule, fields, and MITRE ATT&CK mapping.
-5. **Simulation** — controlled steps performed only in the isolated lab.
-6. **Validation** — raw event, Wazuh alert, rule ID, timestamps, and source/agent fields.
-7. **Investigation** — interpretation, scope, and recommended analyst actions.
-8. **Limitations** — false positives, missing telemetry, version dependencies, and remaining work.
+- **SIEM:** Wazuh Manager, Wazuh Indexer, Wazuh Dashboard
+- **Detection engineering:** custom rules, rule dependencies, decoders, correlation, Sigma concepts
+- **Endpoint monitoring:** Linux authentication logs, Windows Security events, Sysmon planning, FIM
+- **Network security:** Suricata, EVE JSON, ET Open, traffic analysis
+- **Incident response:** alert triage, investigation workflow, evidence review, Active Response safeguards
+- **Identity security:** Active Directory, Group Policy, Fine-Grained Password Policies, Windows LAPS
+- **Automation track:** Shuffle SOAR, webhook integration design, TheHive prerequisites
+- **Lab and testing:** VMware, Ubuntu, Windows, Kali Linux, controlled attack simulation
 
-Use these labels consistently:
+## Repository guide
 
-- **Documented:** described in lab notes.
-- **Configured:** configuration was added to the lab.
-- **Validated:** the expected telemetry and alert were observed and recorded.
-- **Needs validation:** the notes do not contain sufficient evidence to claim a successful test.
+| Chapter | Topic |
+|---|---|
+| [01 — Wazuh Deployment](01-Wazuh-Deployment/README.md) | Platform deployment and agent setup |
+| [02 — Linux Threat Detection](02-Linux-Threat-Detection/README.md) | Linux telemetry and authentication detections |
+| [03 — Windows Threat Detection](03-Windows-Threat-Detection/README.md) | Windows event monitoring and RDP detections |
+| [04 — File Integrity Monitoring](04-File-Integrity-Monitoring/README.md) | Linux and Windows FIM configuration and evidence |
+| [05 — Wazuh and Suricata](05-Wazuh-Suricata-Integration/README.md) | Network telemetry and IDS integration |
+| [06 — Custom Detection Rules](06-Custom-Detection-Rules/README.md) | Custom rules, dependencies, and validation |
+| [07 — Active Directory Security](07-Active-Directory-Threat-Detection/README.md) | Domain policy and detection foundations |
+| [08 — Incident Investigation](08-Incident-Investigation/README.md) | Alert triage and investigation methodology |
+| [09 — Evidence and Documentation](09-Evidence-and-Documentation/README.md) | Evidence lifecycle and publication standards |
+| [10 — Wazuh and Shuffle SOAR](10-Wazuh-Shuffle-SOAR/README.md) | SOAR deployment and integration design |
 
-A configuration file passing XML validation does not, by itself, prove that a detection works.
+## Evidence and validation approach
 
-## Safety and secret handling
+For each scenario, the target evidence chain is:
 
-All simulations are for systems and networks owned by the operator or explicitly authorized for testing. Keep attack simulations inside an isolated lab. Before publication, replace only passwords, SSH private keys, and hashes with the literal `<REDACTED>`. Preserve IP addresses, MAC addresses, hostnames, usernames, and other technical details as requested. Do not publish unredacted secret values.
+1. Lab context and affected endpoint.
+2. Relevant agent, manager, or sensor configuration.
+3. Controlled test procedure and generated activity.
+4. Original endpoint or sensor event.
+5. Matching Wazuh alert, including timestamp, rule ID, agent, and decoded fields.
+6. Validation output and observed response, where applicable.
+7. Investigation notes, limitations, and conclusion.
 
-## Version notes
+Documentation uses explicit status labels such as **Documented**, **Evidence captured**, **Partially validated**, **Validated**, and **Pending**. Screenshots, raw logs, and alert records are described according to what they actually demonstrate.
 
-The source notes refer to Wazuh 4.7 and a Windows agent package 4.7.5. These are historical lab versions, not a recommendation to deploy them today. Confirm Manager and agent compatibility and consult the documentation for the exact installed release before reusing commands.
+## Safety, privacy, and reproducibility
 
-## Project index
+- All attack simulations are intended for isolated systems owned by the operator or explicitly authorized for testing.
+- Passwords and SSH private keys must not be published.
+- Demonstration hash values may remain visible when they are part of controlled technical evidence.
+- Lab IP addresses, MAC addresses, hostnames, usernames, timestamps, and other relevant technical details are retained where useful to reproduce and understand a scenario.
+- Webhook URLs, API tokens, session cookies, and other credentials must remain out of Git.
+- Review the exact Wazuh Manager and agent versions before reusing configuration or rule references.
 
-- [01 — Wazuh Deployment](01-Wazuh-Deployment/README.md)
-- [02 — Linux Threat Detection](02-Linux-Threat-Detection/README.md)
-- [03 — Windows Threat Detection](03-Windows-Threat-Detection/README.md)
-- [04 — File Integrity Monitoring](04-File-Integrity-Monitoring/README.md)
-- [05 — Wazuh and Suricata Integration](05-Wazuh-Suricata-Integration/README.md)
-- [06 — Custom Detection Rules](06-Custom-Detection-Rules/README.md)
-- [07 — Active Directory Threat Detection](07-Active-Directory-Threat-Detection/README.md)
-- [08 — Incident Investigation](08-Incident-Investigation/README.md)
-- [09 — Evidence and Documentation](09-Evidence-and-Documentation/README.md)
-- [10 — Wazuh and Shuffle SOAR](10-Wazuh-Shuffle-SOAR/README.md)
+## Version note
+
+The source lab notes refer to Wazuh 4.7 / agent package 4.7.5. These are historical lab versions, not a recommendation for a new deployment. Verify compatibility and consult the documentation for the exact release in use.
+
+## Project status and next validation priorities
+
+The repository is structured and documented across ten chapters. The most valuable next evidence improvements are:
+
+- Capture raw Suricata EVE events alongside their matching Wazuh alerts.
+- Complete and capture the Active Directory event-to-alert validation chain.
+- Verify Active Response source matching, block duration, and recovery.
+- Capture a real Wazuh webhook delivery and Shuffle workflow execution before describing SOAR as operational.
+
+---
+
+**Maintainer:** [AFF-rgb](https://github.com/AFF-rgb)  
+**Repository:** [Wazuh-SIEM-Detection-Engineering](https://github.com/AFF-rgb/Wazuh-SIEM-Detection-Engineering)
