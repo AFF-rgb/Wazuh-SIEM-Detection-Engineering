@@ -24,8 +24,8 @@ The notes describe a VMware-based lab with an Ubuntu Wazuh server, Windows endpo
 | Linux detection | SSH authentication, privilege escalation, account/key persistence, log tampering, cron changes | Scenarios documented; custom rules require per-version validation |
 | Windows detection | Security events, RDP logons, firewall logs, Sysmon | Configuration documented; telemetry and rule IDs must be verified on the target |
 | Active response | Temporary blocking of a simulated RDP source | Lab configuration recorded; implementation requires correction and end-to-end revalidation |
-| FIM | Linux account files, SSH keys, cron locations | Configuration documented; tune and validate on agents |
-| Suricata | Wazuh integration and network alert analysis | Separate lab work; detailed configuration/evidence to be added |
+| FIM | Linux account/authentication/cron paths and Windows `C:\\Users\\Public` monitoring with who-data and change reporting | Configuration and staged Windows experiment documented; validate per-path/event evidence |
+| Suricata | Wazuh integration, ET Open, nine local signatures, EVE JSON collection, and traffic tests | Configuration and screenshots documented; raw EVE-to-Wazuh alert pairs still needed |
 | Active Directory | Domain and Windows event monitoring | Lab work in progress; detection coverage to be documented separately |
 
 ## Repository structure
@@ -70,7 +70,7 @@ A configuration file passing XML validation does not, by itself, prove that a de
 
 ## Safety and secret handling
 
-All simulations are for systems and networks owned by the operator or explicitly authorized for testing. Keep attack simulations inside an isolated lab. Never publish passwords, API keys, private keys, real public IP addresses, personal data, or unredacted logs. Use placeholders in examples and sanitize screenshots before committing them.
+All simulations are for systems and networks owned by the operator or explicitly authorized for testing. Keep attack simulations inside an isolated lab. Before publication, replace only passwords, SSH private keys, and hashes with the literal `<REDACTED>`. Preserve IP addresses, MAC addresses, hostnames, usernames, and other technical details as requested. Do not publish unredacted secret values.
 
 ## Version notes
 
