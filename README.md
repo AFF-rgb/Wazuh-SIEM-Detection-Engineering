@@ -16,14 +16,14 @@ This repository documents a home lab through its architecture, configuration, at
 
 ## Lab scope
 
-The notes describe a VMware-based lab with an Ubuntu Wazuh server, Windows endpoints, and Kali Linux used for authorized simulations. Exact host addresses, usernames, and machine-specific values are intentionally represented as placeholders.
+The notes describe a VMware-based lab with an Ubuntu Wazuh server, Windows endpoints, and Kali Linux used for authorized simulations. Lab hostnames, addresses, usernames, and other technical details are retained where relevant to the documented scenarios. Only passwords, SSH private keys, and hashes are redacted in published evidence.
 
 | Area | Coverage | Documentation status |
 |---|---|---|
 | Wazuh deployment | Ubuntu server, core services, dashboard, agent enrollment | Documented; version and OS compatibility caveats recorded |
 | Linux detection | SSH authentication, privilege escalation, account/key persistence, log tampering, cron changes | Scenarios documented; custom rules require per-version validation |
 | Windows detection | Security events, RDP logons, firewall logs, Sysmon | Configuration documented; telemetry and rule IDs must be verified on the target |
-| Active response | Temporary blocking of a simulated RDP source | Lab configuration recorded; implementation requires correction and end-to-end revalidation |
+| Active response | Temporary blocking of a simulated RDP source | Configuration and test procedure documented; verify source-IP matching, block/unblock behavior, and end-to-end results before claiming full validation |
 | FIM | Linux account/authentication/cron paths and Windows `C:\Users\Public` monitoring with who-data and change reporting | Configuration and staged Windows experiment documented; validate per-path/event evidence |
 | Suricata | Wazuh integration, ET Open, nine local signatures, EVE JSON collection, and traffic tests | Configuration and screenshots documented; raw EVE-to-Wazuh alert pairs still needed |
 | Active Directory | Domain and Windows event monitoring | Lab work in progress; detection coverage to be documented separately |
@@ -35,13 +35,16 @@ Wazuh-SIEM-Detection-Engineering/
 ├── README.md
 ├── 01-Wazuh-Deployment/
 ├── 02-Linux-Threat-Detection/
+│   └── SSH-Brute-Force/
 ├── 03-Windows-Threat-Detection/
 ├── 04-File-Integrity-Monitoring/
 ├── 05-Wazuh-Suricata-Integration/
+│   ├── 01.png ... 19.png
 ├── 06-Custom-Detection-Rules/
 ├── 07-Active-Directory-Threat-Detection/
 ├── 08-Incident-Investigation/
-└── 09-Evidence-and-Documentation/
+├── 09-Evidence-and-Documentation/
+└── 10-Wazuh-Shuffle-SOAR/
 ```
 
 Each project area should contain its own README, configuration examples, validation procedure, and sanitized evidence where available.
