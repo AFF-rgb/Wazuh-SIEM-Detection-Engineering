@@ -77,13 +77,13 @@ Add the integration block inside the existing `<ossec_config>` element in `/var/
 ```xml
 <integration>
   <name>shuffle</name>
-  <hook_url>https://<SHUFFLE_HOST>/api/v1/hooks/<WEBHOOK_ID></hook_url>
+  <hook_url>http://SHUFFLE_HOST:3001/api/v1/hooks/WEBHOOK_ID</hook_url>
   <level>10</level>
   <alert_format>json</alert_format>
 </integration>
 ```
 
-Replace the placeholders with the actual Shuffle webhook URL. Do not commit the real webhook URL or webhook ID: treat the complete URL as a secret because it can authorize workflow invocation.
+Replace `SHUFFLE_HOST` and `WEBHOOK_ID` with the actual host and webhook identifier. The example uses a plain URL placeholder so the XML remains well-formed; use HTTPS when TLS is configured and trusted. Do not commit the real webhook URL or webhook ID: treat the complete URL as a secret because it can authorize workflow invocation.
 
 Configuration notes:
 - `name` selects Wazuh's built-in Shuffle integration.
