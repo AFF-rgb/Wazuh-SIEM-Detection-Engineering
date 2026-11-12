@@ -256,7 +256,9 @@ The notes describe the ping and SYN scan as successfully detected in Wazuh. The 
 
 ## 8. Evidence and current documentation status
 
-The uploaded archive contains Suricata configuration screenshots, rule-file screenshots, terminal test output, and Wazuh dashboard views. They are not yet published because visible host details, IP/MAC addresses, and other environment-specific information must be reviewed and redacted first.
+The 19 Suricata screenshots have been uploaded to this chapter. They cover sensor configuration, local rules, configuration checks, test traffic, and Wazuh dashboard views. Sensitive values were redacted as requested; other technical details were left unchanged.
+
+**Screenshot evidence:** [Open the 19-image evidence set](./)
 
 | Item | Documentation status |
 |---|---|
@@ -267,7 +269,7 @@ The uploaded archive contains Suricata configuration screenshots, rule-file scre
 | EVE JSON collection via Wazuh Linux agent | Documented from source notes; current endpoint synchronization pending |
 | ICMP and SYN scan tests | Recorded in source notes as detected in Wazuh |
 | Raw EVE JSON and matching Wazuh alert exports | Not yet included |
-| Sanitized screenshots | Pending review and redaction |
+| Screenshot evidence | 19 PNG files uploaded; passwords, SSH private keys, and hashes redacted where present |
 
 ## References
 
