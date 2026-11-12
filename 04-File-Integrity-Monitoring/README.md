@@ -133,11 +133,11 @@ Confirm that the service returns to the running state and that the agent reconne
 
 The supplied archive contains 13 screenshots associated with the Windows FIM experiment. They show the Wazuh dashboard, Windows agent configuration, service management, creation of a test file in the Public folder, and dashboard event views.
 
-**Evidence publication status:** the 13 source screenshots have been reviewed. Nine do not visibly expose password, SSH-key, or hash values. Four detailed event screenshots (source filenames `6.png`, `8.png`, `10.png`, and `13.png`) contain hash values and must have those values replaced with the literal `<REDACTED>` before publication. They are not linked here yet. Preserve all other technical details, including IP addresses, MAC addresses, hostnames, usernames, and timestamps.
+**Evidence publication status:** the 13 source screenshots have been reviewed. Nine do not visibly expose password, SSH-key, or hash values. Demonstration hash values may remain visible under the agreed portfolio policy. Passwords and SSH private keys must still be protected.
 
 ### Screenshots cleared for publication
 
-The following nine screenshots were reviewed and cleared for the agreed secret categories (passwords, SSH private keys, and hashes). They are embedded below. The four screenshots still awaiting hash redaction are intentionally excluded from this gallery.
+All 13 original screenshots are retained and linked below. Demonstration hash values are accepted as part of the controlled technical evidence; passwords and SSH private keys must remain protected.
 
 | Screenshot | Evidence |
 |---|---|
@@ -146,10 +146,14 @@ The following nine screenshots were reviewed and cleared for the agreed secret c
 | [3.png](3.png) | ![Windows FIM evidence 3](3.png) |
 | [4.png](4.png) | ![Windows FIM evidence 4](4.png) |
 | [5.png](5.png) | ![Windows FIM evidence 5](5.png) |
+| [6.png](6.png) | ![Windows FIM evidence 6](6.png) |
 | [7.png](7.png) | ![Windows FIM evidence 7](7.png) |
+| [8.png](8.png) | ![Windows FIM evidence 8](8.png) |
 | [9.png](9.png) | ![Windows FIM evidence 9](9.png) |
+| [10.png](10.png) | ![Windows FIM evidence 10](10.png) |
 | [11.png](11.png) | ![Windows FIM evidence 11](11.png) |
 | [12.png](12.png) | ![Windows FIM evidence 12](12.png) |
+| [13.png](13.png) | ![Windows FIM evidence 13](13.png) |
 
 | Use case | What the source notes/screenshots show | Publication status |
 |---|---|---|
@@ -179,5 +183,5 @@ A file change can be expected maintenance, software activity, or user work. Esta
 
 - [02 — Linux Threat Detection](../02-Linux-Threat-Detection/README.md)
 - [06 — Custom Detection Rules](../06-Custom-Detection-Rules/README.md)
-- [08 — Incident Investigation](../08-Incident-Investigation/README.md)
-- [09 — Evidence and Documentation](../09-Evidence-and-Documentation/README.md)
+- [08 — Incident Investigation](../07-Incident-Investigation/README.md)
+- [09 — Evidence and Documentation](../08-Evidence-and-Documentation/README.md)

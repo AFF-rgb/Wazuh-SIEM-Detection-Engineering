@@ -92,4 +92,4 @@ The archive contains the scenario description, rule snippet, and test procedure.
 - [Linux Threat Detection](../README.md)
 - [Custom Detection Rules](../../06-Custom-Detection-Rules/README.md)
 - [File Integrity Monitoring](../../04-File-Integrity-Monitoring/README.md)
-- [Incident Investigation](../../08-Incident-Investigation/README.md)
+- [Incident Investigation](../../07-Incident-Investigation/README.md)

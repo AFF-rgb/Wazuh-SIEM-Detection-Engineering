@@ -1,4 +1,4 @@
-# 10 — Wazuh and Shuffle SOAR
+# 09 — Wazuh and Shuffle SOAR
 
 This chapter documents the SOAR deployment foundation recorded in the lab archive and defines a reproducible plan for integrating Wazuh with Shuffle. The source notes cover Docker-based Shuffle deployment and installation prerequisites for TheHive and Cassandra. They do **not** contain sufficient evidence to claim a completed Wazuh-to-Shuffle alert workflow, automated enrichment, case creation, or response execution.
 

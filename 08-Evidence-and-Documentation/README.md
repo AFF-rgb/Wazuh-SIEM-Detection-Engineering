@@ -1,4 +1,4 @@
-# 09 — Evidence and Documentation
+# 08 — Evidence and Documentation
 
 This chapter defines how evidence from the Wazuh lab is reviewed, organized, validated, and prepared for publication. The goal is a portfolio that is technically credible, traceable, and reproducible without inventing results or removing useful technical context.
 
@@ -147,5 +147,4 @@ Before considering a chapter complete, verify:
 - [04 — File Integrity Monitoring](../04-File-Integrity-Monitoring/README.md)
 - [05 — Wazuh and Suricata Integration](../05-Wazuh-Suricata-Integration/README.md)
 - [06 — Custom Detection Rules](../06-Custom-Detection-Rules/README.md)
-- [07 — Active Directory Threat Detection](../07-Active-Directory-Threat-Detection/README.md)
-- [08 — Incident Investigation](../08-Incident-Investigation/README.md)
+- - [07 — Incident Investigation](../07-Incident-Investigation/README.md)
