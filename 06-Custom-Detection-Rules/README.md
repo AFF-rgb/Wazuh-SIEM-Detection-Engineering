@@ -21,8 +21,8 @@ Version note: the documented Windows agent installer is also 4.7.5. Treat these 
 | 100003 | Cron/crontab changes | Decoder and rule recorded; crontab syslog samples recorded | Capture complete `wazuh-logtest` Phase 1–3 output and a manager alert |
 | 100010 | SSH brute force followed by successful login | Rule snippet recorded | Verify both parent rule IDs, event ordering, time window, and same-source correlation |
 | 100011 | Sudo root-shell activity | Rule snippet recorded | Verify decoded command field and matching behavior |
-| 100012 | Local account creation | Rule snippet recorded | Verify the base rule and account-creation event fields |
-| 100013 | Authentication-log tampering | Rule snippet recorded | Verify FIM event group, file path field, and alert |
+| 100012 | Local account creation | Attack steps and rule snippet recorded; parent SID 5902 confirmed in the Wazuh syslog ruleset | Verify the custom child alert and account fields in the lab |
+| 100013 | Authentication-log tampering | FIM monitoring and truncate/delete test commands recorded; custom rule snippet recorded | Confirm the exact FIM event type and generated custom alert |
 | 100020 | Failed RDP logon (Logon Type 10) | Rule snippet recorded | Verify Windows field names and an Event ID 4625 alert |
 | 100021 | Successful RDP logon (Logon Type 10) | Rule snippet recorded | Verify Windows field names and an Event ID 4624 alert |
 | 100030 | Possible network scanning | Rule snippet recorded | Verify the firewall base SID and actual source event |
@@ -88,7 +88,7 @@ The notes record this rule design:
 </group>
 ```
 
-**Review notes:** The source notes do not include the decoded event or a captured alert proving that SID 5902 is the account-creation parent. I could not confirm SID 5902 as the intended account-creation rule in the relevant upstream Wazuh v4.7.5 rules files reviewed. Treat this parent SID as **unverified**; use the actual Windows/Linux event source and decoded event to identify the correct parent before enabling the rule. The alert should identify the affected account and endpoint. Also review the group label: `.SSH` does not describe this account-creation use case and should be replaced with an appropriate local group name when the rule is finalized.
+**Parent-rule check (Wazuh v4.7.5):** SID **5902** is the built-in syslog/adduser rule for a new user account. It matches messages beginning with `new user` or `new account added`, and maps to MITRE T1136. This confirms that the recorded `<if_sid>5902</if_sid>` parent is appropriate for Linux `useradd` syslog events. See the [Wazuh v4.7.5 syslog rules](https://github.com/wazuh/wazuh/blob/v4.7.5/ruleset/rules/0020-syslog_rules.xml). The source notes record creation of `SOC_backdoor` and the custom rule, but the custom child rule's own generated alert should still be retained as evidence. The group label `.SSH` is misleading for account creation; use a descriptive group such as `linux,persistence,` when maintaining the rule. The separate FIM alert for a new `authorized_keys` file/change is a distinct signal and should not be presented as proof that the account-creation rule fired.
 
 ### 100013 — Authentication log tampering
 
@@ -105,7 +105,7 @@ The notes record this rule design:
 </group>
 ```
 
-**Review notes:** The Linux agent configuration in the notes collects `/var/log/auth.log` and configures FIM for selected sensitive paths. Confirm that the generated FIM alert actually contains the path in a field matched by this rule. A generic `match` against the raw event may not match the decoded path field. Test truncation and deletion separately; they may produce different FIM event descriptions.
+**Review notes:** The source notes record FIM monitoring for `/var/log/auth.log` and two test actions: truncating the file to zero bytes and deleting it. The `if_group=syscheck` condition scopes this rule to FIM events, while `<match>/var/log/auth.log</match>` searches the event text for that path. This is a broad path-change alert: as written, it can match any FIM change event that contains the path, not only a clear/delete action. Therefore, the description should not claim that every match proves the log was cleared or deleted. Retain the raw FIM event and confirm whether it reports modification, size reduction, or deletion; test the two actions separately and document the observed event text before narrowing the rule.
 
 ### 100003 — Cron/crontab persistence
 
