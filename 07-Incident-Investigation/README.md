@@ -70,7 +70,6 @@ Use the relevant chapter for the detection logic and lab-specific configuration.
 - **Authentication log tampering:** investigate FIM events affecting `/var/log/auth.log`; distinguish modification, truncation, and deletion using the original event details.
 - **Windows RDP:** correlate failed logons (Event ID 4625) and successful logons (Event ID 4624, Logon Type 10); verify account, source address, and sequence.
 - **Windows process activity:** inspect process creation and Sysmon telemetry where configured; validate executable path, command line, parent process, and user.
-- **Active Directory changes:** investigate account creation/deletion, account disablement, and security-group membership changes; validate the corresponding Windows Security events and affected object.
 - **Network activity:** correlate Suricata alerts with endpoint and firewall telemetry; confirm direction, protocol, signature, and whether the observed traffic reached the target service.
 
 ## 4. Minimum case record

@@ -120,7 +120,6 @@ The supplied `wazuh-documentation.zip` archive is the source material for this r
 | Windows FIM | 13 screenshots showing configuration, service activity, Public-folder testing, and Wazuh Dashboard views | All 13 original screenshots are present in Chapter 04. Demonstration hash values are accepted and do not require redaction under the agreed portfolio policy. Passwords and SSH private keys remain subject to redaction. |
 | Suricata | Suricata notes and 19 screenshots | Screenshots are present in Chapter 05. Raw EVE JSON and matching Wazuh alert JSON should be added when available to strengthen the end-to-end evidence chain. |
 | Shuffle/SOAR | Deployment and integration notes | The supplied screenshot folder duplicates the Suricata screenshot set; it is not evidence of a completed Shuffle workflow. Do not present workflow execution or automated response as validated without actual workflow evidence. |
-| Active Directory | Domain and policy foundation is documented in Chapter 07 | The supplied archive does not contain a dedicated AD alert evidence set. Wazuh AD detection remains pending until corresponding Windows events and Wazuh alerts are captured. |
 
 This inventory describes what was present in the supplied archive at review time. Update it when new evidence is safely prepared and committed.
 
