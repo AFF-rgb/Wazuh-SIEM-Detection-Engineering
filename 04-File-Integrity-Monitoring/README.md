@@ -135,6 +135,22 @@ The supplied archive contains 13 screenshots associated with the Windows FIM exp
 
 **Evidence publication status:** the 13 source screenshots have been reviewed. Nine do not visibly expose password, SSH-key, or hash values. Four detailed event screenshots (source filenames `6.png`, `8.png`, `10.png`, and `13.png`) contain hash values and must have those values replaced with the literal `<REDACTED>` before publication. They are not linked here yet. Preserve all other technical details, including IP addresses, MAC addresses, hostnames, usernames, and timestamps.
 
+### Screenshots cleared for publication
+
+The following nine screenshots were reviewed and cleared for the agreed secret categories (passwords, SSH private keys, and hashes). They are embedded below. The four screenshots still awaiting hash redaction are intentionally excluded from this gallery.
+
+| Screenshot | Evidence |
+|---|---|
+| [1.png](1.png) | ![Windows FIM evidence 1](1.png) |
+| [2.png](2.png) | ![Windows FIM evidence 2](2.png) |
+| [3.png](3.png) | ![Windows FIM evidence 3](3.png) |
+| [4.png](4.png) | ![Windows FIM evidence 4](4.png) |
+| [5.png](5.png) | ![Windows FIM evidence 5](5.png) |
+| [7.png](7.png) | ![Windows FIM evidence 7](7.png) |
+| [9.png](9.png) | ![Windows FIM evidence 9](9.png) |
+| [11.png](11.png) | ![Windows FIM evidence 11](11.png) |
+| [12.png](12.png) | ![Windows FIM evidence 12](12.png) |
+
 | Use case | What the source notes/screenshots show | Publication status |
 |---|---|---|
 | Linux account and SSH paths | Linux FIM paths are recorded in the centralized configuration notes | Configuration documented; per-path alert evidence still required |
