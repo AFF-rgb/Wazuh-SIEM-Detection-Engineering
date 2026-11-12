@@ -51,7 +51,9 @@ The notes record this rule design:
 </group>
 ```
 
-**Review notes:** The intended behavior is a successful SSH authentication associated with prior failed authentication from the same source. The source notes do not provide the raw events or a complete log-test transcript proving that rule IDs 5712 and 5715 represent the required failure/success sequence in this deployment. Confirm the installed ruleset's parent IDs and decoded source-IP field. Add and validate an explicit correlation window if the intended detection is limited to a defined period. Do not publish this as validated until both event sequence and generated alert are captured.
+**Version-specific ruleset check (Wazuh v4.7.5):** the upstream v4.7.5 SSH ruleset defines rule **5712** as an SSH brute-force threshold for a non-existent user (8 matches within 120 seconds, same source IP) and rule **5715** as SSH authentication success (child of 5700). This supports the intended parent-rule pairing in the recorded custom rule for that release. See the [Wazuh v4.7.5 SSH rules](https://github.com/wazuh/wazuh/blob/v4.7.5/ruleset/rules/0095-sshd_rules.xml).
+
+**Remaining review notes:** This correlation therefore inherits the built-in 5712 threshold behavior; it does not represent every possible SSH brute-force pattern, such as attempts against an existing account that do not trigger 5712. Confirm the decoded source-IP field and event ordering with representative endpoint logs and `wazuh-logtest`. The custom rule still needs a captured raw-event sequence and generated alert before it can be marked validated. Re-check the parent IDs if the deployed Wazuh version differs from v4.7.5.
 
 ### 100011 — Sudo root-shell activity
 
