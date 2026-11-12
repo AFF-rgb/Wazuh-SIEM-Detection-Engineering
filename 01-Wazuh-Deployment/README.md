@@ -10,7 +10,7 @@ This section documents the deployment and baseline configuration of the Wazuh pl
 - Hypervisor: VMware.
 - Endpoint agents: Windows and Linux systems.
 
-The notes refer to Wazuh 4.7 and a Windows agent package 4.7.5. Treat these as historical version details. Verify the exact installed versions before repeating the procedure.
+The Wazuh Manager version was later confirmed directly on the running lab server as **v4.7.5 (revision 40720)**. The Windows agent installation notes also reference package version 4.7.5. The exact installed versions of the Indexer, Dashboard, and each endpoint agent have not yet been independently confirmed.
 
 ## Installation procedure recorded
 
@@ -129,6 +129,32 @@ sudo /var/ossec/bin/verify-agent-conf
 ```
 
 Then verify group assignment and synchronization, and confirm the resulting events in the dashboard.
+
+## Recorded live validation — 2026-11-05
+
+The following checks were run on the Ubuntu Wazuh server:
+
+| Check | Observed result |
+|---|---|
+| `/var/ossec/bin/wazuh-control info` | Wazuh Manager reported `v4.7.5`, revision `40720`, type `server` |
+| `systemctl status wazuh-manager` | `active (running)` |
+| `agent_control -l` | Local manager listed as active; three enrolled endpoint agents were listed as disconnected |
+
+The endpoint names and addresses are intentionally omitted. This is a historical snapshot from 2026-11-05, not a statement about the current state of the lab.
+
+**Important distinction:** the `wazuh-agent` service check was attempted on the Wazuh server, where that service was not installed. That result does not establish the state of the separate Linux endpoint. The Linux endpoint must be checked directly.
+
+### Next validation required
+
+On the Linux endpoint assigned to the Linux agent, verify the agent service and version, then inspect the authentication log:
+
+```bash
+sudo systemctl status wazuh-agent --no-pager
+sudo /var/ossec/bin/wazuh-control info
+sudo tail -n 20 /var/log/auth.log
+```
+
+The endpoint connectivity issue and authentication-event collection remain **pending validation** until those checks are completed and the manager shows the agent as active.
 
 ## Validation checklist
 
