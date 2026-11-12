@@ -126,8 +126,7 @@ If an alert does not reach Shuffle, check the integration in layers:
 - Confirm the webhook URL is correct and the Shuffle trigger is running.
 - Check Wazuh manager logs under `/var/ossec/logs/` for Integrator errors.
 - Check Shuffle workflow execution history and webhook input.
-- Verify name resolution, routing, firewall rules, TLS certificate trust, and connectivity from the Wazuh manager to the Shuffle endpoint.
-- Confirm that the Wazuh manager can reach the webhook service and that no proxy or network policy blocks the request.
+- Verify name resolution, routing, firewall rules, TLS certificate trust, and connectivity from the Wazuh manager to the Shuffle endpoint, including any proxy or network policy that could block the request.
 
 Operational safeguards:
 - Use a dedicated integration identity and minimum required permissions.
@@ -157,7 +156,7 @@ Operational safeguards:
 
 The original SOAR notes contain an example login credential in plaintext. It is deliberately omitted from this repository. If it was ever a real or reused credential, change it immediately and review whether it was stored in browser history, screenshots, shell history, or other files.
 
-Before publication, replace only passwords, SSH private keys, and hashes with the literal `<REDACTED>`. Preserve IP addresses, MAC addresses, hostnames, usernames, timestamps, and other technical details. Do not commit webhook URLs, API tokens, session cookies, or other credentials; store integration secrets in an appropriate secret-management facility rather than workflow text or Git.
+Before publication, protect passwords and SSH private keys by replacing them with the literal `<REDACTED>`. Hash values that are part of controlled demonstrations may remain visible, as agreed for this portfolio. Preserve IP addresses, MAC addresses, hostnames, usernames, timestamps, and other technical details. Do not commit webhook URLs, API tokens, session cookies, or other credentials; store integration secrets in an appropriate secret-management facility rather than workflow text or Git.
 
 ## Current documentation and evidence status
 
