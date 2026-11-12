@@ -91,9 +91,9 @@ For every documented investigation, capture:
 
 - Use `/var/ossec/bin/wazuh-logtest` to test how a sample event is decoded and which rules match. A logtest result validates rule processing for that sample; it does not by itself prove that the live endpoint collected or generated the event.
 - For an end-to-end validation, retain evidence of the activity on the endpoint, the collected event, and the corresponding Wazuh alert or archive record.
-- Preserve relevant raw event content and timestamps. Redact only passwords, SSH private keys, and hashes by replacing them with `<REDACTED>`.
+- Preserve relevant raw event content and timestamps. Protect passwords and SSH private keys by replacing them with `<REDACTED>`. Hash values that are part of controlled demonstrations may remain visible, as agreed for this portfolio.
 - Preserve IP addresses, MAC addresses, hostnames, usernames, timestamps, rule IDs, and other technical details.
-- Never publish credentials, private-key material, or password hashes.
+- Never publish passwords, credentials, or private-key material. Demonstration hash values may remain visible when they are intentionally included as technical evidence.
 - Label screenshots and exported logs with the scenario, source host, and capture date. Keep evidence references consistent between the investigation notes and the relevant project chapter.
 - Do not fabricate missing events, alert outcomes, response results, or analyst conclusions.
 
