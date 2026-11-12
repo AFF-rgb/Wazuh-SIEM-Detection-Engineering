@@ -29,7 +29,7 @@ Version note: the documented Windows agent installer is also 4.7.5. Treat these 
 | 100100 | Repeated Windows failed logons | Rule snippet and base SID 60112 recorded in one section | Confirm base SID from the exact 4625 alert and test threshold behavior |
 | 100900 | RDP brute-force threshold / Active Response | Rule and response configuration recorded; base SID 60122 recorded in a separate RDP section | Verify source-IP grouping, firewall block, timeout, and safe rollback |
 
-The source notes contain two different base rule IDs for Windows failed logons: **60112** in the general Windows correlation section and **60122** in the RDP/Active Response section. Do not treat them as interchangeable. Confirm the rule ID shown by the actual 4625 alert on the installed Wazuh version before enabling either correlation rule.
+**Wazuh v4.7.5 ruleset verification:** the two SIDs in the source notes are not interchangeable. Upstream rule **60122** is the Windows logon-failure rule and includes Event IDs 529 and 4625. Upstream rule **60112** is an audit-policy-change rule (including Event ID 4719), not a failed-logon rule. See the [Wazuh v4.7.5 Windows Security rules](https://github.com/wazuh/wazuh/blob/v4.7.5/ruleset/rules/0580-win-security_rules.xml). Therefore, rule 100100's recorded parent SID **60112 is incorrect for failed logons** on Wazuh 4.7.5; the documented parent should be reviewed and corrected to 60122 after confirming the actual alert on the lab manager. The RDP threshold's 60122 parent is consistent with this release, but it still needs an explicit Logon Type 10 condition and source-IP correlation before it can be treated as an RDP-specific brute-force detector.
 
 ## Linux detection designs
 
@@ -181,7 +181,7 @@ The general Windows section records base rule ID 60112 and this threshold:
 </group>
 ```
 
-**Review notes:** The supplied configuration does not group matches by source IP. Without a stable grouping key, failures from different sources may contribute to the same threshold. Add and test source-IP or another appropriate correlation key after confirming the decoded field. The notes state that 60112 was confirmed in one lab inspection, but another section records 60122 for the RDP scenario; verify the base SID for the specific event before use.
+**Review notes:** For Wazuh 4.7.5, the recorded parent SID 60112 is incorrect for failed logons; upstream 60112 represents audit-policy changes, while 60122 represents logon failures. Correct the parent only after confirming the live 4625 alert's rule ID. The supplied threshold does not group matches by source IP, so failures from different sources may contribute to the same count. Add and test a stable source-IP correlation key. Also note that this rule counts Windows logon failures generally unless it explicitly filters Logon Type 10; it should not be labelled RDP-specific without that condition.
 
 ### 100900 — RDP brute-force threshold and Active Response
 
@@ -200,7 +200,8 @@ The notes also record an Active Response command using `netsh.exe`, with local e
 
 **Safety and validation requirements:**
 
-- Confirm that the base SID represents a failed RDP logon (Event ID 4625, Logon Type 10).
+- Confirm that the base SID represents a failed logon (Event ID 4625); on Wazuh 4.7.5, upstream SID 60122 is the failed-logon rule.
+- Add an explicit Logon Type 10 condition so the threshold is RDP-specific; the recorded rule currently counts all events matched by its parent.
 - Scope the threshold to the same source IP; the recorded rule does not show a source-IP grouping condition.
 - Confirm the response command is correctly defined for the Windows agent and supported by the installed Wazuh release.
 - Test only with a controlled lab source and confirm the firewall rule blocks the expected address.
