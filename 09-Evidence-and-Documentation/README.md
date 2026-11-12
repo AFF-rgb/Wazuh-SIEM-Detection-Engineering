@@ -28,16 +28,15 @@ windows-rdp-02-wazuh-alert.png
 
 ## Redaction checklist
 
-Before committing evidence, remove:
-- Passwords, API tokens, and installer-generated credentials.
-- Private keys and authentication secrets.
-- Personal names, email addresses, and personal device identifiers.
-- Public IP addresses and any sensitive internal network details.
-- Unnecessary account data and sensitive file contents.
-- Browser sessions, access tokens, and dashboard URLs containing secrets.
+Before committing evidence, replace only the following values with the literal `<REDACTED>`:
+- Passwords and other plaintext password values.
+- SSH private keys.
+- Password hashes and other authentication hashes.
 
-Private RFC1918 lab addresses may also be replaced with placeholders for consistency.
+Preserve IP addresses, MAC addresses, hostnames, usernames, timestamps, and other technical details. Do not broaden redaction to ordinary lab metadata. If a screenshot or log contains one of the three secret categories above, cover only the secret value with an opaque redaction and use the literal `<REDACTED>` where text replacement is possible.
 
 ## Evidence integrity
 
 Do not fabricate screenshots, alerts, terminal output, timestamps, or validation results. If a screenshot is illustrative rather than captured from the lab, label it clearly as an illustration. If a test has not been run, mark it as pending instead of presenting expected output as observed output.
+
+The archive supplied for this project is the primary source for the documented lab work. Preserve the original technical context when preparing evidence for publication; apply the narrow redaction policy above.
