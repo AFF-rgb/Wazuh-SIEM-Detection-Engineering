@@ -133,7 +133,7 @@ Confirm that the service returns to the running state and that the agent reconne
 
 The supplied archive contains 13 screenshots associated with the Windows FIM experiment. They show the Wazuh dashboard, Windows agent configuration, service management, creation of a test file in the Public folder, and dashboard event views.
 
-The screenshots are source evidence for the staged experiment. They should be published only after checking that passwords, SSH keys, and hashes are replaced with the literal `<REDACTED>`. Other technical details should remain unchanged, as requested.
+**Evidence publication status:** the 13 source screenshots have been reviewed. Nine do not visibly expose password, SSH-key, or hash values. Four detailed event screenshots (source filenames `6.png`, `8.png`, `10.png`, and `13.png`) contain hash values and must have those values replaced with the literal `<REDACTED>` before publication. They are not linked here yet. Preserve all other technical details, including IP addresses, MAC addresses, hostnames, usernames, and timestamps.
 
 | Use case | What the source notes/screenshots show | Publication status |
 |---|---|---|
