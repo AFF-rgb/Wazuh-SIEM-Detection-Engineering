@@ -53,7 +53,7 @@ The lab includes the Windows LAPS schema update and the `msLAPS-*` attributes. T
 
 ## Wazuh telemetry and detection scope
 
-The Windows Security channel is the primary source for domain authentication, account, group-membership, and audit-policy events. Wazuh's Windows agent monitors the Security channel by default in its standard event-channel configuration; verify the actual deployed `ossec.conf` and agent version rather than adding duplicate collection blocks. Wazuh supports additional channels, including Sysmon and PowerShell Operational, when explicitly configured. See the [Wazuh Windows event-channel collection guide](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/configuration.html). <Cite refs={["turn117321search0"]}/>
+The Windows Security channel is the primary source for domain authentication, account, group-membership, and audit-policy events. Wazuh's Windows agent monitors the Security channel by default in its standard event-channel configuration; verify the actual deployed `ossec.conf` and agent version rather than adding duplicate collection blocks. Wazuh supports additional channels, including Sysmon and PowerShell Operational, when explicitly configured. See the [Wazuh Windows event-channel collection guide](https://documentation.wazuh.com/current/user-manual/capabilities/log-data-collection/configuration.html).
 
 | Windows Event ID | Activity | Investigation focus |
 |---|---|---|
