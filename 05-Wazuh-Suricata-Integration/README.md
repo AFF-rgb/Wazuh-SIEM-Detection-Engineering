@@ -26,7 +26,7 @@ This chapter documents the lab integration of Suricata network intrusion detecti
 | Wazuh shared configuration | `/var/ossec/etc/shared/Linux/agent.conf` |
 | Rule source | Emerging Threats Open (ET Open) |
 
-Machine-specific IP addresses, MAC addresses, and host identifiers from the original notes and screenshots are intentionally not reproduced here.
+Relevant lab IP addresses, MAC addresses, and host identifiers are retained where they help explain the test environment. Passwords and SSH private keys are excluded from public documentation.
 
 ## 1. Install Suricata
 
@@ -236,10 +236,10 @@ The source notes record three tests. Host addresses are intentionally replaced w
 | Test | Recorded command/activity | Result recorded in source notes |
 |---|---|---|
 | IDS test request | `curl http://testmyids.org` from the Linux management VM | Command output was captured; the notes describe this as a test request intended to trigger IDS detection |
-| ICMP reachability | `ping <LAB_TARGET_IP>` | Four replies received, zero packet loss; the notes state that the ICMP activity was detected in Wazuh as potential host discovery |
-| TCP SYN scan | `nmap -sS -p 1-1000 <LAB_TARGET_IP>` | The notes state that the activity was detected in Wazuh as a potential port-scanning attempt |
+| ICMP reachability | `ping 192.168.83.130` | Four replies received, zero packet loss; the notes state that the ICMP activity was detected in Wazuh as potential host discovery |
+| TCP SYN scan | `nmap -sS -p 1-1000 192.168.83.130` | The notes state that the activity was detected in Wazuh as a potential port-scanning attempt |
 
-The original notes also show an HTTP connection attempt to the lab target returning **connection refused**. This indicates that the attempted TCP connection to port 80 was not accepted at that time; it does not invalidate the separate ICMP ping result.
+The original notes also show `curl http://192.168.83.130` returning **connection refused** for TCP port 80. This indicates that the attempted TCP connection to port 80 was not accepted at that time; it does not invalidate the separate ICMP ping result.
 
 The notes describe the ping and SYN scan as successfully detected in Wazuh. The corresponding screenshots are retained for review, but they must be sanitized before public upload. The complete raw EVE JSON records and matching Wazuh alert JSON have not yet been added to this repository.
 
@@ -255,15 +255,12 @@ The notes describe the ping and SYN scan as successfully detected in Wazuh. The 
 - **SID 1000008 — executable URI:** matches `.exe` in the HTTP URI buffer. It does not inspect the response body, file contents, or determine whether a file is malicious.
 - **SID 1000009 — HTTP POST:** matches HTTP POST methods in established client-to-server flows. POST is normal application behavior and should not be treated as malicious by itself.
 - Content-based HTTP signatures depend on the sensor seeing inspectable HTTP. HTTPS payloads are encrypted unless traffic is decrypted before inspection.
-- Confirm that the sensor is positioned on a network path where it can observe the traffic being tested, and correlate Suricata alerts with Wazuh timestamps, agent, source/destination, and rule metadata.
-- Confirm that the Suricata sensor is positioned on a network path where it can observe the traffic being tested.
+- Confirm that the sensor is positioned on a network path where it can observe the traffic being tested.
 - Correlate Suricata alerts with Wazuh agent, source/destination, timestamp, and rule metadata during investigation.
 
 ## 8. Evidence and current documentation status
 
-The 19 Suricata screenshots have been uploaded to this chapter. They cover sensor configuration, local rules, configuration checks, test traffic, and Wazuh dashboard views. Sensitive values were redacted as requested; other technical details were left unchanged.
-
-**Screenshot evidence:** [Open the 19-image evidence set](./)
+The 19 Suricata screenshots have been uploaded to this chapter. They cover sensor configuration, local rules, configuration checks, test traffic, and Wazuh dashboard views. Passwords and SSH private keys were excluded from public evidence; hash values are retained where they are part of the FIM/IDS demonstration, and other technical details are preserved.
 
 | Item | Documentation status |
 |---|---|
@@ -274,7 +271,7 @@ The 19 Suricata screenshots have been uploaded to this chapter. They cover senso
 | EVE JSON collection via Wazuh Linux agent | Documented from source notes; current endpoint synchronization pending |
 | ICMP and SYN scan tests | Recorded in source notes as detected in Wazuh |
 | Raw EVE JSON and matching Wazuh alert exports | Not yet included |
-| Screenshot evidence | 19 PNG files uploaded; passwords, SSH private keys, and hashes redacted where present |
+| Screenshot evidence | 19 PNG files uploaded; passwords and SSH private keys excluded; demonstration hash values and other technical details retained |
 
 ## 9. Screenshot evidence index
 
