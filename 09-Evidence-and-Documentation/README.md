@@ -75,13 +75,13 @@ Before committing evidence, replace only these secret values with the literal `<
 
 - Passwords and other plaintext password values.
 - SSH private keys.
-- Password hashes and other authentication hashes.
+- Do not publish passwords or SSH private keys. Demonstration hash values may remain visible when they are part of controlled technical evidence, as agreed for this portfolio.
 
 Preserve IP addresses, MAC addresses, hostnames, usernames, timestamps, rule IDs, file paths, and other technical details. Do not broaden redaction to ordinary lab metadata.
 
 For screenshots, cover only the secret value with an opaque redaction. Where text can be edited, replace the value with the literal `<REDACTED>`. After editing, inspect the published copy to ensure the secret is not visible beneath a translucent overlay, in an adjacent panel, or elsewhere in the image.
 
-Do not publish credentials, private-key material, or password hashes. If a secret appears in a configuration file, redact its value while retaining the surrounding setting name and structure where safe.
+Do not publish passwords, other credentials, or private-key material. Demonstration hashes may remain visible under the agreed portfolio policy. If a secret appears in a configuration file, redact its value while retaining the surrounding setting name and structure where safe.
 
 ## 5. Evidence integrity and validation labels
 
@@ -117,7 +117,7 @@ The supplied `wazuh-documentation.zip` archive is the source material for this r
 
 | Evidence set | Source material reviewed | Publication status |
 |---|---|---|
-| Windows FIM | 13 screenshots showing configuration, service activity, Public-folder testing, and Wazuh Dashboard views | Nine screenshots do not visibly expose the specified secret categories. Four screenshots — `6.png`, `8.png`, `10.png`, and `13.png` — contain hash values and require redaction before publication. The screenshots have not yet been added to the repository. |
+| Windows FIM | 13 screenshots showing configuration, service activity, Public-folder testing, and Wazuh Dashboard views | All 13 original screenshots are present in Chapter 04. Demonstration hash values are accepted and do not require redaction under the agreed portfolio policy. Passwords and SSH private keys remain subject to redaction. |
 | Suricata | Suricata notes and 19 screenshots | Screenshots are present in Chapter 05. Raw EVE JSON and matching Wazuh alert JSON should be added when available to strengthen the end-to-end evidence chain. |
 | Shuffle/SOAR | Deployment and integration notes | The supplied screenshot folder duplicates the Suricata screenshot set; it is not evidence of a completed Shuffle workflow. Do not present workflow execution or automated response as validated without actual workflow evidence. |
 | Active Directory | Domain and policy foundation is documented in Chapter 07 | The supplied archive does not contain a dedicated AD alert evidence set. Wazuh AD detection remains pending until corresponding Windows events and Wazuh alerts are captured. |
@@ -137,7 +137,7 @@ Before considering a chapter complete, verify:
 - [ ] Limitations and unverified behavior are disclosed.
 - [ ] Screenshots and logs have been reviewed under the redaction policy.
 - [ ] Filenames, links, and status labels match the repository contents.
-- [ ] No credentials, private keys, or authentication hashes remain in published material.
+- [ ] No passwords, other credentials, or SSH private keys remain in published material. Demonstration hash values may remain visible under the agreed evidence policy.
 
 ## 9. Related chapters
 
